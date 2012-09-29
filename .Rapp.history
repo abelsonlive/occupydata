@@ -1,0 +1,250 @@
+data$body = htmlToText(data$body)
+head(data$body)
+data = read.csv("data/tumblr.csv", stringsAsFactors=F)
+text = gsub("<([[:alpha:]][[:alnum:]]*)(.[^>]*)>([.^<]*)", "\\3", data$body)
+head(text)
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+head(data)
+gsub('\b(https?|ftp|file)://[-A-Z0-9+&@#/%?=~_|!:,.;]*[A-Z0-9+&@#/%=~_|]' "", data$body)
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+data$body = htmlToText(data$body)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", p4k$review)))
+text = stemDocument(text)
+head(text)
+rm(list=ls())
+Sys.setenv(NOAWT=TRUE)
+require("tm")
+require("stringr")
+require("Snowball")
+require("lda")
+require("plyr")
+setwd("~/Dropbox/GitRepository/occupydata/")
+source("scripts/htmlToText.R")
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+convert date
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text
+data = data[which(data$body!=""),]
+nrow(data)
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text = stemDocument(text)
+text[1]
+stopwords <- c(stopwords('SMART'),"occupywallst.org", "http://")
+text = Corpus(VectorSource(text))
+stopwords <- c(stopwords('SMART'),"occupywallst.org", "http://")
+text <- tm_map(text, removeWords, stopwords)
+doclines<-as.character(text)
+corpus<-lexicalize(doclines, sep=" ", count=1)
+N<-2
+keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
+documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
+K<-4
+result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
+top.topic.words(result$topics, num.words = 10, by.score = FALSE)
+top.topic.words(result$topics, num.words = 20, by.score = FALSE)
+rm(list=ls())
+Sys.setenv(NOAWT=TRUE)
+require("tm")
+require("stringr")
+require("Snowball")
+require("lda")
+require("plyr")
+setwd("~/Dropbox/GitRepository/occupydata/")
+source("scripts/htmlToText.R")
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+remove empties
+data = data[which(data$body!=""),]
+convert date
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text = stemDocument(text)
+convert to corpus
+text = Corpus(VectorSource(text))
+remove stopwords
+stopwords <- c(stopwords('SMART'),"occupywallst.org", "http://")
+text <- tm_map(text, removeWords, stopwords)
+text <- tm_map(text, removeWhiteSpace)
+change document lines into the format for LDA
+doclines<-as.character(text)
+corpus<-lexicalize(doclines, sep=" ", count=1)
+Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
+N is the the least number of appearance of words that can be considered
+N<-2
+keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
+Re-lexicalize, using this subsetted vocabulary
+documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
+Gibbs Sampling
+K is the number of topics
+K<-4
+result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
+top words in each topic
+top.topic.words(result$topics, num.words = 20, by.score = FALSE)
+rm(list=ls())
+Sys.setenv(NOAWT=TRUE)
+require("tm")
+require("stringr")
+require("Snowball")
+require("lda")
+require("plyr")
+setwd("~/Dropbox/GitRepository/occupydata/")
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+remove empties
+data = data[which(data$body!=""),]
+convert date
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text = stemDocument(text)
+convert to corpus
+text = Corpus(VectorSource(text))
+remove stopwords
+stopwords <- c(stopwords('SMART'),
+"occupywallst.org",
+"http://",
+"99", "000")
+text <- tm_map(text, removeWords, stopwords)
+text <- tm_map(text, removeWhiteSpace)
+change document lines into the format for LDA
+doclines<-as.character(text)
+corpus<-lexicalize(doclines, sep=" ", count=1)
+Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
+N is the the least number of appearance of words that can be considered
+N<-2
+keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
+Re-lexicalize, using this subsetted vocabulary
+documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
+Gibbs Sampling
+K is the number of topics
+K<-10
+result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
+rm(list=ls())
+Sys.setenv(NOAWT=TRUE)
+require("tm")
+require("stringr")
+require("Snowball")
+require("lda")
+require("plyr")
+setwd("~/Dropbox/GitRepository/occupydata/")
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+remove empties
+data = data[which(data$body!=""),]
+convert date
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text = stemDocument(text)
+convert to corpus
+text = Corpus(VectorSource(text))
+remove stopwords
+stopwords <- c(stopwords('SMART'),
+"occupywallst.org",
+"http://",
+"99", "000")
+text <- tm_map(text, removeWords, stopwords)
+text <- tm_map(text, stripWhiteSpace)
+rm(list=ls())
+Sys.setenv(NOAWT=TRUE)
+require("tm")
+require("stringr")
+require("Snowball")
+require("lda")
+require("plyr")
+setwd("~/Dropbox/GitRepository/occupydata/")
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+remove empties
+data = data[which(data$body!=""),]
+convert date
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text = stemDocument(text)
+convert to corpus
+text = Corpus(VectorSource(text))
+remove stopwords
+stopwords <- c(stopwords('SMART'),
+"occupywallst.org",
+"http://",
+"99", "000")
+text <- tm_map(text, removeWords, stopwords)
+text <- tm_map(text, stripWhitespace)
+text = gsub("  ", " ", text)
+doclines<-as.character(text)
+corpus<-lexicalize(doclines, sep=" ", count=1)
+Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
+N is the the least number of appearance of words that can be considered
+N<-2
+keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
+Re-lexicalize, using this subsetted vocabulary
+documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
+Gibbs Sampling
+K is the number of topics
+K<-10
+result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
+top words in each topic
+top.topic.words(result$topics, num.words = 20, by.score = FALSE)
+top documents in each topic
+top.topic.documents(result$document_sums, num.documents = 20, alpha = 0.1)
+rm(list=ls())
+Sys.setenv(NOAWT=TRUE)
+require("tm")
+require("stringr")
+require("Snowball")
+require("lda")
+require("plyr")
+setwd("~/Dropbox/GitRepository/occupydata/")
+data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
+remove empties
+data = data[which(data$body!=""),]
+convert date
+data$date = as.Date(data$datetime)
+text = str_trim(
+tolower(
+gsub("[[:punct:]]", " ", data$body)))
+text = stemDocument(text)
+convert to corpus
+text = Corpus(VectorSource(text))
+remove stopwords
+stopwords <- c(stopwords('SMART'),
+"occupywallst.org",
+"http://",
+"99", "000")
+text <- tm_map(text, removeWords, stopwords)
+text <- tm_map(text, stripWhitespace)
+text <- tm_map(text, removeNumbers)
+text = gsub("  ", " ", text)
+change document lines into the format for LDA
+doclines<-as.character(text)
+corpus<-lexicalize(doclines, sep=" ", count=1)
+Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
+N is the the least number of appearance of words that can be considered
+N<-2
+keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
+Re-lexicalize, using this subsetted vocabulary
+documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
+Gibbs Sampling
+K is the number of topics
+K<-10
+result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
+top words in each topic
+top.topic.words(result$topics, num.words = 20, by.score = FALSE)
+top documents in each topic
+top.topic.documents(result$document_sums, num.documents = 20, alpha = 0.1)
+K<-5
+result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
+top.topic.words(result$topics, num.words = 20, by.score = FALSE)
+ls(result)
+results$assignments
+result$assignments
