@@ -2,7 +2,7 @@ require("tm")
 require("stringr")
 require("topicmodels")
 require("plyr")
-setwd("~/Projects/data-hack/staturday/")
+setwd("~/Dropbox/GitRepository/occupydata")
 
 data = read.csv("data/TumblrClean.csv", stringsAsFactors=F)
 
@@ -14,6 +14,13 @@ text = str_trim(
 
 # convert to corpus
 text = Corpus(VectorSource(text))
+stopwords <- c(stopwords('SMART'), "contact", 
+						"commercial", "poster",
+						"services", "interests",
+						"location", "http",
+						"craigslist")
+
+text <- tm_map(text, removeWords, stopwords)
 
 # Quotations in the following comments are excerpts from "topicmodels: An R
 # Package for Fitting Topic Models" (Grün & Hornik, 2010):

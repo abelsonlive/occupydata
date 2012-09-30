@@ -1,250 +1,250 @@
-pdf(height=4, width=4, file="viz/piechart.pdf")
-pie(counts$V1, labels = counts$topic, main="Pie Chart of Topics", col=cols)
-dev.off()
-daycounts = ddply(d, .(date), nrow)
-plot(daycounts, type="h")
-plot(daycounts, type="h", lwd=2, col=brewer.pal[1])
-plot(daycounts, type="h", lwd=2, col=cols[1])
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n")
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n")
-axis.Date(1, unique(d$date), at, labels = TRUE)
-axis.Date(1, unique(d$date), labels = TRUE)
+finalData <- sortedData
+}
+Totals for each vertical slice
+totals <- colSums(finalData)
+Determine baseline offset
+if (type == 0) {
+yOffset <- rep(0, length(totals))
+} else if (type == 1) {
+yOffset <- -totals / 2
+} else if (type == 2) {
+n <- length(finalData[,1])
+i <- 1:length(finalData[,1])
+parts <- (n - i + 1) * finalData
+theSums <- colSums(parts)
+yOffset <- -theSums / (n + 1)
+}
+Axis upper and lower bounds
+yLower <- min(yOffset)
+yUpper <- max(yOffset + totals)
+Max, min, and span of weights for each layer
+maxRow <- max(rowSums(finalData))
+minRow <- min(rowSums(finalData))
+rowSpan <- if ( (maxRow - minRow) > 0 ) { maxRow - minRow } else { 1 }
+Make the graph.
+par(las=1, cex=0.6, bty="n")
+plot(0, 0, type="n", xlim=c(1, length(finalData[1,])), ylim=c(yLower, yUpper), xlab=NA, ylab=NA)
+for (i in 1:length(finalData[,1])) {
+colIndex <- floor( (nColors-2) * ( (maxRow - sum(finalData[i,])) / rowSpan ) ) + 1
+polygon(c(1:length(finalData[i,]), length(finalData[i,]):1), c(finalData[i,] + yOffset, rev(yOffset)), col=colors[colIndex], border="#ffffff", lwd=0.2)
+Move up to next layer.
+yOffset <- yOffset + finalData[i,]
+}
+}
+Helper function to convert negative values to zero
+zeroNegatives <- function(x) {
+if (x < 0) { return(0) }
+else { return(x) }
+}
+rm(list=ls())
+setwd("~/Dropbox/GitRepository/occupydata/")
 library("lubridate")
-d$month = month(d$date)
-d$year = year(d$date)
-head(d$month)
-head
-head(d)
-d$mthyr = paste(d$month, d$year, sep="-")
-daycounts = ddply(d, .(mthyr, topic), nrow)
-daycounts
-melth(daycounts)
-melt(daycounts)
-library("plyr")
-melt(daycounts)
-library("reshape2")
-melt(daycounts)
-d = d[order(d$date),]
-daycounts = ddply(d, .(date), nrow)
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n")
-axis.Date(1, unique(d$date), labels = TRUE)
-daycounts = ddply(d, .(date), nrow)
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-par(mai=(0.1, 0.1, 0.1, 0.1))
-plot(daycounts, type="h", lwd=2, col=cols[1], xax
-daycounts = ddply(d, .(date), nrow)
-par(mai=(0.1, 0.1, 0.1, 0.1))
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-daycounts = ddply(d, .(date), nrow)
-par(mai=(0.1, 0.1, 0.1, 0.1))
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.1, 0.1, 0.1, 0.1))
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=2, col=cols[4],
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-plot(daycounts, type="h", lwd=2, col=cols[4],
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
-lwd="5")
-plot(daycounts, type="h", lwd=2, col=cols[4],
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
-lwd=5)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=2, col=cols[4],
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
-lwd=5)
-axis.Date(1, unique
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=5, col=cols[4],
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=5, col=cols[4],
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.5, 0.9, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=5, col=cols[4], xlab="Time", ylab="date",
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-daycounts = ddply(d, .(date), nrow)
-par(mai=c(0.9, 0.9, 0.5, 0.5), family="OpenSans")
-plot(daycounts, type="h", lwd=5, col=cols[4], xlab="Time", ylab="date",
-xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
-axis.Date(1, unique(d$date), labels = TRUE)
-melt(daycounts)
-names(d)
-iWants = llply(d$body, iWants)
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\.]*."))
-return(as.character(sentences))
+library("sqldf")
+source("scripts/areagraph.R")
+read in, order, and format data
+data = read.csv("data/tumblrFinal.csv", stringsAsFactors=F)
+names(data) = tolower(gsub("\\.","",names(data)))
+data$date = as.Date(data$datetime)
+data = data[order(data$date, decreasing=F),]
+data$p1 = ifelse(data$topic==1,1,0)
+data$p2 = ifelse(data$topic==2,1,0)
+data$p3 = ifelse(data$topic==3,1,0)
+data$p4 = ifelse(data$topic==4,1,0)
+data$p_pos= ifelse(data$fit=="positive",1,0)
+data$p_neg= ifelse(data$fit=="negative",1,0)
+data$p_neu= ifelse(data$fit=="neutral",1,0)
+normalize variables
+normalize = function(x){
+x = sqrt(x/max(x))
+return(x)
 }
-iWants = llply(d$body, iWants)
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\.]*."))
-return(as.character(sentences))
-}
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\.]*."))
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
-}
-iWants = llply(d$body, iWants)
-iWants
-iWants = unlist(llply(d$body, iWants))
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
-}
-wnats = unlist(llply(d$body, iWants))
-head(wnats)
-wnats
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "I (want|wanted)[^\\.]*."))
-return(as.character(sentences))
-}
-wnats = unlist(llply(d$body, iWants))
-wnats
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
-}
-wants = unlist(llply(d$body, iWants))
-iAms = function(body){
-sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
-return(as.character(sentences))
-}
-ams = unlist(llply(d$body, iAms))
-ams
-ams = ams[!grep("99", ams)]
-ams = gsub("I am", "", ams)
-ams
-ams = unlist(llply(d$body, iAms))
-ams = ams[!grep("99", ams)]
-ams
-grep("99", ams)
-ams = unlist(llply(d$body, iAms))
-ams = gsub("I am", "", ams)
-ams
-asm = gsub("99%", "", ams)
-ams = unlist(llply(d$body, iAms))
-ams = gsub("I am", "", ams)
-ams = gsub("99%", "", ams)
-ams
-ams = gsub("OWS", "", ams)
-write(ams, "data/ams.txt")
-wants = gsub("(want|wanted)", "", ams)
-wants
+data[,10:13] = t(apply(data[,10:13], 1, normalize))
+data[,14:15] = t(apply(data[,14:15], 1, normalize))
+names(data)
+head(data)
+viz_data = sqldf("select date,
+sum(students) as students,
+sum(jobseconomy) as jobseconomy,
+sum(healthcare) as healthcare,
+sum(ideals) as ideals,
+sum(p1) as p_students,
+sum(p2) as p_jobseconomy,
+sum(p3) as p_healthcare,
+sum(p4) as p_ideals,
+sum(p_pos) as p_pos,
+sum(p_neu) as p_neu,
+sum(p_neg) as p_neg
+from data
+group by date")
+viz_data_1 = t(viz_data[,6:9])
+names(viz_data_1) = as.Date(viz_data$date)
+areaGraph(viz_data_1)
+rm(list=ls())
 setwd("~/Dropbox/GitRepository/occupydata/")
-library("plyr")
-library("stringr")
-extract i wants
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
+library("lubridate")
+library("sqldf")
+source("scripts/areagraph.R")
+read in, order, and format data
+data = read.csv("data/tumblrFinal.csv", stringsAsFactors=F)
+names(data) = tolower(gsub("\\.","",names(data)))
+data$date = as.Date(data$datetime)
+data = data[order(data$date, decreasing=F),]
+data$p1 = ifelse(data$topic==1,1,0)
+data$p2 = ifelse(data$topic==2,1,0)
+data$p3 = ifelse(data$topic==3,1,0)
+data$p4 = ifelse(data$topic==4,1,0)
+data$p_pos= ifelse(data$fit=="positive",1,0)
+data$p_neg= ifelse(data$fit=="negative",1,0)
+data$p_neu= ifelse(data$fit=="neutral",1,0)
+normalize variables
+normalize = function(x){
+x = sqrt(x/max(x))
+return(x)
 }
-wants = unlist(llply(d$body, iWants))
-wants = gsub("(want|wanted)", "", ams)
-wants  = str_trim(gsub("OWS", "", ams))
-write(ams, "data/wants.txt")
-iAms = function(body){
-sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
-return(as.character(sentences))
-}
-extract i ams
-ams = unlist(llply(d$body, iAms))
-ams = gsub("I am", "", ams)
-ams = gsub("99%", "", ams)
-ams = gsub("99 percent", "", ams)
-ams = str_trim(gsub("OWS", "", ams))
-write(ams, "data/ams.txt")
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
-}
-wants = unlist(llply(d$body, iWants))
-wants = gsub("(want|wanted)", "", ams)
-wants  = str_trim(gsub("OWS", "", ams))
-write(ams, "data/wants.txt")
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
-}
-wants = unlist(llply(d$body, iWants))
-wants
-wants = unlist(llply(d$body, iWants))
-wants = gsub("(want|wanted)", "", wants)
-wants  = str_trim(gsub("OWS", "", wants))
-write(ams, "data/wants.txt")
-iAms = function(body){
-sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
-return(as.character(sentences))
-}
-extract i ams
-ams = unlist(llply(d$body, iAms))
-ams = gsub("I am", "", ams)
-ams = gsub("99%", "", ams)
-ams = gsub("99 percent", "", ams)
-ams = str_trim(gsub("OWS", "", ams))
-write(ams, "data/ams.txt")
+data[,10:13] = t(apply(data[,10:13], 1, normalize))
+data[,14:15] = t(apply(data[,14:15], 1, normalize))
+names(data)
+head(data)
+viz_data = sqldf("select date,
+sum(students) as students,
+sum(jobseconomy) as jobseconomy,
+sum(healthcare) as healthcare,
+sum(ideals) as ideals,
+sum(p1) as p_students,
+sum(p2) as p_jobseconomy,
+sum(p3) as p_healthcare,
+sum(p4) as p_ideals,
+sum(p_pos) as p_pos,
+sum(p_neu) as p_neu,
+sum(p_neg) as p_neg
+from data
+group by date")
+viz_data_1 = t(viz_data[,6:9])
+names(viz_data_1) = as.Date(viz_data$date)
+areaGraph(viz_data_1)
+rm(list=ls())
 setwd("~/Dropbox/GitRepository/occupydata/")
-library("plyr")
-library("stringr")
-extract i wants
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
+library("lubridate")
+library("sqldf")
+source("scripts/areagraph.R")
+read in, order, and format data
+data = read.csv("data/tumblrFinal.csv", stringsAsFactors=F)
+names(data) = tolower(gsub("\\.","",names(data)))
+data$date = as.Date(data$datetime)
+data = data[order(data$date, decreasing=F),]
+data$p1 = ifelse(data$topic==1,1,0)
+data$p2 = ifelse(data$topic==2,1,0)
+data$p3 = ifelse(data$topic==3,1,0)
+data$p4 = ifelse(data$topic==4,1,0)
+data$p_pos= ifelse(data$fit=="positive",1,0)
+data$p_neg= ifelse(data$fit=="negative",1,0)
+data$p_neu= ifelse(data$fit=="neutral",1,0)
+normalize variables
+normalize = function(x){
+x = sqrt(x/max(x))
+return(x)
 }
-wants = unlist(llply(d$body, iWants))
-wants = gsub("(want|wanted)", "", wants)
-wants  = str_trim(gsub("OWS", "", wants))
-write(ams, "data/wants.txt")
-iAms = function(body){
-sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
-return(as.character(sentences))
+data[,10:13] = t(apply(data[,10:13], 1, normalize))
+data[,14:15] = t(apply(data[,14:15], 1, normalize))
+names(data)
+head(data)
+viz_data = sqldf("select date,
+sum(students) as students,
+sum(jobseconomy) as jobseconomy,
+sum(healthcare) as healthcare,
+sum(ideals) as ideals,
+sum(p1) as p_students,
+sum(p2) as p_jobseconomy,
+sum(p3) as p_healthcare,
+sum(p4) as p_ideals,
+sum(p_pos) as p_pos,
+sum(p_neu) as p_neu,
+sum(p_neg) as p_neg
+from data
+group by date")
+viz_data_1 = t(viz_data[,6:9])
+names(viz_data_1) = as.Date(viz_data$date)
+areaGraph(viz_data_1)
+Type 0: stacked area, 1: themeriver, 2: streamgraph
+areaGraph <- function(thedata, type=0, smooth=FALSE, nPoints =1000) {
+Color palette
+nColors <- 10
+pal <- colorRampPalette(c("#1F78B4","#"))
+colors <- pal(nColors)
+Sort the data
+if (type == 0) {					# Stacked area
+Greatest to least weights
+sortedData <- thedata[order(rowSums(thedata), decreasing=TRUE),]
+} else if (type ==1 || type == 2) {				# Themeriver or streamgraph
+Initialize sorted data frame
+sortedData <- thedata[1,]
+weights <- rowSums(thedata)
+topWeight <- weights[1]
+bottomWeight <- weights[1]
+if (length(thedata[,1]) > 1) {
+Commence sorting. Apparently not most efficient way, but whatever.
+for (i in 2:length(thedata[,1])) {
+if (topWeight > bottomWeight) {
+sortedData <- rbind(sortedData, thedata[i,])
+} else {
+sortedData <- rbind(thedata[i,], sortedData)
+bototmWeight <- bottomWeight + weights[i]
 }
-extract i ams
-ams = unlist(llply(d$body, iAms))
-ams = gsub("I am", "", ams)
-ams = gsub("99%", "", ams)
-ams = gsub("99 percent", "", ams)
-ams = str_trim(gsub("OWS", "", ams))
-write(ams, "data/ams.txt")
-setwd("~/Dropbox/GitRepository/occupydata/")
-library("plyr")
-library("stringr")
-extract i wants
-iWants = function(body){
-sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
-return(as.character(sentences))
 }
-wants = unlist(llply(d$body, iWants))
-write(ams, "data/wants.txt")
-iAms = function(body){
-sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
-return(as.character(sentences))
 }
-extract i ams
-ams = unlist(llply(d$body, iAms))
-write(ams, "data/ams.txt")
+}
+Smooth the data
+if (smooth) {
+Initialize smoothed data. Note: Probably a better way to do this, but it works. [NY]
+firstRow <- spline(1:length(sortedData[1,]), sortedData[1,], nPoints)$y
+firstRow <- sapply(firstRow, zeroNegatives)
+smoothData <- data.frame( rbind(firstRow, rep(0, length(firstRow))) )
+smoothData <- smoothData[1,]
+Smooth the rest of the data using spline().
+if (length(sortedData[,1]) > 1) {
+for (i in 2:length(sortedData[,1])) {
+newRow <- spline(1:length(sortedData[i,]), sortedData[i,], nPoints)$y
+newRow <- sapply(newRow, zeroNegatives)
+smoothData <- rbind(smoothData, newRow)
+}
+}
+finalData <- smoothData
+} else {
+finalData <- sortedData
+}
+Totals for each vertical slice
+totals <- colSums(finalData)
+Determine baseline offset
+if (type == 0) {
+yOffset <- rep(0, length(totals))
+} else if (type == 1) {
+yOffset <- -totals / 2
+} else if (type == 2) {
+n <- length(finalData[,1])
+i <- 1:length(finalData[,1])
+parts <- (n - i + 1) * finalData
+theSums <- colSums(parts)
+yOffset <- -theSums / (n + 1)
+}
+Axis upper and lower bounds
+yLower <- min(yOffset)
+yUpper <- max(yOffset + totals)
+Max, min, and span of weights for each layer
+maxRow <- max(rowSums(finalData))
+minRow <- min(rowSums(finalData))
+rowSpan <- if ( (maxRow - minRow) > 0 ) { maxRow - minRow } else { 1 }
+Make the graph.
+par(las=1, cex=0.6, bty="n")
+plot(0, 0, type="n", xlim=c(1, length(finalData[1,])), ylim=c(yLower, yUpper), xlab=NA, ylab=NA)
+for (i in 1:length(finalData[,1])) {
+colIndex <- floor( (nColors-2) * ( (maxRow - sum(finalData[i,])) / rowSpan ) ) + 1
+polygon(c(1:length(finalData[i,]), length(finalData[i,]):1), c(finalData[i,] + yOffset, rev(yOffset)), col=colors[colIndex], border="#ffffff", lwd=0.2)
+Move up to next layer.
+yOffset <- yOffset + finalData[i,]
+}
+}
+Helper function to convert negative values to zero
+zeroNegatives <- function(x) {
+if (x < 0) { return(0) }
+else { return(x) }
+}
