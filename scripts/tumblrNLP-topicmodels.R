@@ -1,26 +1,32 @@
+Sys.setenv(NOAWT=TRUE)
 require("tm")
 require("stringr")
 require("topicmodels")
 require("plyr")
+require("RWeka")
+require("Snowball")
 setwd("~/Dropbox/GitRepository/occupydata")
-
 data = read.csv("data/TumblrClean.csv", stringsAsFactors=F)
 
 # remove empties
 data = data[which(data$body!=""),]
-text = str_trim(
-			 tolower(
-			 gsub("[[:punct:]]", " ", data$body)))
+text = str_trim(tolower(data$body)))
 
 # convert to corpus
 text = Corpus(VectorSource(text))
-stopwords <- c(stopwords('SMART'), "contact", 
-						"commercial", "poster",
-						"services", "interests",
-						"location", "http",
-						"craigslist")
+
+
+# HERES WHAT I ADDED _ BA #
+#_________________________#
+stopwords <- c(stopwords('SMART'),
+				"occupywallst.org", 
+				"http://",
+				"99", "000", "wall",
+				"k", "don", "occupy", "street",
+				"week", "year", "years")
 
 text <- tm_map(text, removeWords, stopwords)
+#_________________________#
 
 # Quotations in the following comments are excerpts from "topicmodels: An R
 # Package for Fitting Topic Models" (Grün & Hornik, 2010):
@@ -49,10 +55,11 @@ dtm <- dtm[row_sums(dtm) > 0,]
 # "In the following we fit an LDA model with [3] topics using ... Gibbs sampling
 # with a burn-in of 1000 iterations and recording every 100th iterations for
 # 1000 iterations. The initial α is set to the default value..." 
-k <- 4
+k <- 5
 lda <- LDA(dtm, k = k, method = "Gibbs", control = list(seed = 1000, burnin = 1000, 
 				thin = 100, iter = 1000))
 
 Terms <- terms(lda, 10)
 
 Terms
+setwd("~/Dropbox/GitRepository/occupydata")
