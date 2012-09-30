@@ -5,7 +5,7 @@ require("topicmodels")
 require("plyr")
 require("RWeka")
 require("Snowball")
-setwd("~/Dropbox/GitRepository/occupydata")
+setwd()
 data = read.csv("data/TumblrClean.csv", stringsAsFactors=F)
 
 # remove empties
@@ -58,8 +58,7 @@ dtm <- dtm[row_sums(dtm) > 0,]
 k <- 5
 lda <- LDA(dtm, k = k, method = "Gibbs", control = list(seed = 1000, burnin = 1000, 
 				thin = 100, iter = 1000))
-
+nrow(lda)
 Terms <- terms(lda, 10)
 
 Terms
-setwd("~/Dropbox/GitRepository/occupydata")
