@@ -1,19 +1,22 @@
+# change to the directory you download to
+setwd("~/Dropbox/GitRepository/occupydata/")
+
+#libraries
 require("tm")
 require("stringr")
 require("lda")
 require("plyr")
-setwd("~/Dropbox/GitRepository/occupydata/")
 
+# read in data
 data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
 
-# remove empties
+# remove empty posts
 data = data[which(data$body!=""),]
 
 # convert date
 data$date = as.Date(data$datetime)
 
-counts = ddply(data, .(date), nrow)
-plot(counts, type="h")
+# clean up text
 text = str_trim(
 			 tolower(
 			 gsub("[[:punct:]]", " ", data$body)))
@@ -29,6 +32,7 @@ stopwords <- c(stopwords('SMART'),
 				"k", "don", "occupy", "street",
 				"week", "year", "years")
 
+# clean up text more
 text <- tm_map(text, removeWords, stopwords)
 text <- tm_map(text, stripWhitespace)
 text <- tm_map(text, removeNumbers)

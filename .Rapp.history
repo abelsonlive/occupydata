@@ -1,250 +1,250 @@
-corpus<-lexicalize(doclines, sep=" ", count=1)
-Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
-N is the the least number of appearance of words that can be considered
-N<-2
-keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
-Re-lexicalize, using this subsetted vocabulary
-documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
-Gibbs Sampling
-K is the number of topics
-K<-5
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-ls(result)
-top words in each topic
-top.topic.words(result$topics, num.words = 20, by.score = FALSE)
-top documents in each topic
-top.topic.documents(result$document_sums, num.documents = 20, alpha = 0.1)
-ls(result)
-result$document_sums
-ls(result)
-head(result$topic_sums)
-head(result$topics)
-help(package="lda")
-demo(slda)
-demo(lda)
-topic.proportions <- t(result$document_sums) / colSums(result$document_sums)
-topic.proportions
-head(topic.proportions)
-nrow(result$document_sums)
-K<-5
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-ls(result)
-length(result$topic_sums)
-length(result$document_sums)
-nrow(result$document_sums)
-demo(lda)
-topic.proportions <- t(result$document_sums) / colSums(result$document_sums)
-topic.proportions
-head(topic.proportions)
-head(result$document_sums)
-nrow(result$document_sums)
-ls(result)
-ls(result$log.likelihoods)
-head(result$log.likelihoods)
-K<-4
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-nrow(result$document_sums)
-ncol(result$document_sums)
-topic.films<-rep(0,2522)
-for(j in 1:2522) {
-topic.films[j]<-which.max(result$document_sums[ ,j])
-ifelse(max(result$document_sums[,j])==0, topic.films[j]<-0, topic.films[j]<-topic.films[j])
+pdf(height=4, width=4, file="viz/piechart.pdf")
+pie(counts$V1, labels = counts$topic, main="Pie Chart of Topics", col=cols)
+dev.off()
+daycounts = ddply(d, .(date), nrow)
+plot(daycounts, type="h")
+plot(daycounts, type="h", lwd=2, col=brewer.pal[1])
+plot(daycounts, type="h", lwd=2, col=cols[1])
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n")
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n")
+axis.Date(1, unique(d$date), at, labels = TRUE)
+axis.Date(1, unique(d$date), labels = TRUE)
+library("lubridate")
+d$month = month(d$date)
+d$year = year(d$date)
+head(d$month)
+head
+head(d)
+d$mthyr = paste(d$month, d$year, sep="-")
+daycounts = ddply(d, .(mthyr, topic), nrow)
+daycounts
+melth(daycounts)
+melt(daycounts)
+library("plyr")
+melt(daycounts)
+library("reshape2")
+melt(daycounts)
+d = d[order(d$date),]
+daycounts = ddply(d, .(date), nrow)
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n")
+axis.Date(1, unique(d$date), labels = TRUE)
+daycounts = ddply(d, .(date), nrow)
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+par(mai=(0.1, 0.1, 0.1, 0.1))
+plot(daycounts, type="h", lwd=2, col=cols[1], xax
+daycounts = ddply(d, .(date), nrow)
+par(mai=(0.1, 0.1, 0.1, 0.1))
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+daycounts = ddply(d, .(date), nrow)
+par(mai=(0.1, 0.1, 0.1, 0.1))
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.1, 0.1, 0.1, 0.1))
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=2, col=cols[1], xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=2, col=cols[4],
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+plot(daycounts, type="h", lwd=2, col=cols[4],
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
+lwd="5")
+plot(daycounts, type="h", lwd=2, col=cols[4],
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
+lwd=5)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=2, col=cols[4],
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
+lwd=5)
+axis.Date(1, unique
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=5, col=cols[4],
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time",
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.5, 0.5, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=5, col=cols[4],
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.5, 0.9, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=5, col=cols[4], xlab="Time", ylab="date",
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+daycounts = ddply(d, .(date), nrow)
+par(mai=c(0.9, 0.9, 0.5, 0.5), family="OpenSans")
+plot(daycounts, type="h", lwd=5, col=cols[4], xlab="Time", ylab="date",
+xaxt="n", main="Posts on wearethe99percent.tumblr.com over time")
+axis.Date(1, unique(d$date), labels = TRUE)
+melt(daycounts)
+names(d)
+iWants = llply(d$body, iWants)
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\.]*."))
+return(as.character(sentences))
 }
-data$topic = topic.films
-names(data$topic)
-names(data)
-data$topic
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-top.topic.words(result$topics, num.words = 20, by.score = FALSE)
-counts = ddply(data, .(date), nrow)
-plot(counts, type="h")
-counts = ddply(data, .(date), nrow)
-plot(counts, type="h")
-rm(list=ls())
-Sys.setenv(NOAWT=TRUE)
-require("tm")
-require("stringr")
-require("Snowball")
-require("lda")
-require("plyr")
+iWants = llply(d$body, iWants)
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\.]*."))
+return(as.character(sentences))
+}
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\.]*."))
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
+}
+iWants = llply(d$body, iWants)
+iWants
+iWants = unlist(llply(d$body, iWants))
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
+}
+wnats = unlist(llply(d$body, iWants))
+head(wnats)
+wnats
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "I (want|wanted)[^\\.]*."))
+return(as.character(sentences))
+}
+wnats = unlist(llply(d$body, iWants))
+wnats
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
+}
+wants = unlist(llply(d$body, iWants))
+iAms = function(body){
+sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
+return(as.character(sentences))
+}
+ams = unlist(llply(d$body, iAms))
+ams
+ams = ams[!grep("99", ams)]
+ams = gsub("I am", "", ams)
+ams
+ams = unlist(llply(d$body, iAms))
+ams = ams[!grep("99", ams)]
+ams
+grep("99", ams)
+ams = unlist(llply(d$body, iAms))
+ams = gsub("I am", "", ams)
+ams
+asm = gsub("99%", "", ams)
+ams = unlist(llply(d$body, iAms))
+ams = gsub("I am", "", ams)
+ams = gsub("99%", "", ams)
+ams
+ams = gsub("OWS", "", ams)
+write(ams, "data/ams.txt")
+wants = gsub("(want|wanted)", "", ams)
+wants
 setwd("~/Dropbox/GitRepository/occupydata/")
-data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
-remove empties
-data = data[which(data$body!=""),]
-convert date
-data$date = as.Date(data$datetime)
-counts = ddply(data, .(date), nrow)
-plot(counts, type="h")
-text = str_trim(
-tolower(
-gsub("[[:punct:]]", " ", data$body)))
-text = stemDocument(text)
-convert to corpus
-text = Corpus(VectorSource(text))
-remove stopwords
-stopwords <- c(stopwords('SMART'),
-"occupywallst.org",
-"http://",
-"99", "000", "wall",
-"k", "don", "occupy", "street",
-"week", "year" "years")
-text <- tm_map(text, removeWords, stopwords)
-text <- tm_map(text, stripWhitespace)
-text <- tm_map(text, removeNumbers)
-text = gsub("  ", " ", text)
-change document lines into the format for LDA
-doclines<-as.character(text)
-corpus<-lexicalize(doclines, sep=" ", count=1)
-Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
-N is the the least number of appearance of words that can be considered
-N<-2
-keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
-Re-lexicalize, using this subsetted vocabulary
-documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
-Gibbs Sampling
-K is the number of topics
-K<-4
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-top.topic.words(result$topics, num.words = 20, by.score = FALSE)
-topic.films<-rep(0,2522)
-for(j in 1:2522) {
-topic.films[j]<-which.max(result$document_sums[ ,j])
-ifelse(max(result$document_sums[,j])==0, topic.films[j]<-0, topic.films[j]<-topic.films[j])
+library("plyr")
+library("stringr")
+extract i wants
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
 }
-data$topic = topic.films
-rm(list=ls())
-Sys.setenv(NOAWT=TRUE)
-require("tm")
-require("stringr")
-require("Snowball")
-require("lda")
-require("plyr")
+wants = unlist(llply(d$body, iWants))
+wants = gsub("(want|wanted)", "", ams)
+wants  = str_trim(gsub("OWS", "", ams))
+write(ams, "data/wants.txt")
+iAms = function(body){
+sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
+return(as.character(sentences))
+}
+extract i ams
+ams = unlist(llply(d$body, iAms))
+ams = gsub("I am", "", ams)
+ams = gsub("99%", "", ams)
+ams = gsub("99 percent", "", ams)
+ams = str_trim(gsub("OWS", "", ams))
+write(ams, "data/ams.txt")
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
+}
+wants = unlist(llply(d$body, iWants))
+wants = gsub("(want|wanted)", "", ams)
+wants  = str_trim(gsub("OWS", "", ams))
+write(ams, "data/wants.txt")
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
+}
+wants = unlist(llply(d$body, iWants))
+wants
+wants = unlist(llply(d$body, iWants))
+wants = gsub("(want|wanted)", "", wants)
+wants  = str_trim(gsub("OWS", "", wants))
+write(ams, "data/wants.txt")
+iAms = function(body){
+sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
+return(as.character(sentences))
+}
+extract i ams
+ams = unlist(llply(d$body, iAms))
+ams = gsub("I am", "", ams)
+ams = gsub("99%", "", ams)
+ams = gsub("99 percent", "", ams)
+ams = str_trim(gsub("OWS", "", ams))
+write(ams, "data/ams.txt")
 setwd("~/Dropbox/GitRepository/occupydata/")
-data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
-remove empties
-data = data[which(data$body!=""),]
-convert date
-data$date = as.Date(data$datetime)
-counts = ddply(data, .(date), nrow)
-plot(counts, type="h")
-text = str_trim(
-tolower(
-gsub("[[:punct:]]", " ", data$body)))
-text = stemDocument(text)
-convert to corpus
-text = Corpus(VectorSource(text))
-remove stopwords
-stopwords <- c(stopwords('SMART'),
-"occupywallst.org",
-"http://",
-"99", "000", "wall",
-"k", "don", "occupy", "street",
-"week", "year", "years")
-text <- tm_map(text, removeWords, stopwords)
-text <- tm_map(text, stripWhitespace)
-text <- tm_map(text, removeNumbers)
-text = gsub("  ", " ", text)
-change document lines into the format for LDA
-doclines<-as.character(text)
-corpus<-lexicalize(doclines, sep=" ", count=1)
-Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
-N is the the least number of appearance of words that can be considered
-N<-2
-keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
-Re-lexicalize, using this subsetted vocabulary
-documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
-Gibbs Sampling
-K is the number of topics
-K<-4
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-top.topic.words(result$topics, num.words = 20, by.score = FALSE)
-topic.films<-rep(0,2522)
-for(j in 1:2522) {
-topic.films[j]<-which.max(result$document_sums[ ,j])
-ifelse(max(result$document_sums[,j])==0, topic.films[j]<-0, topic.films[j]<-topic.films[j])
+library("plyr")
+library("stringr")
+extract i wants
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
 }
-data$topic = topic.films
-top words in each topic
-top documents in each topic
-top.topic.documents(result$document_sums, num.documents = 20, alpha = 0.1)
-rm(list=ls())
-Sys.setenv(NOAWT=TRUE)
-require("tm")
-require("stringr")
-require("Snowball")
-require("lda")
-require("plyr")
+wants = unlist(llply(d$body, iWants))
+wants = gsub("(want|wanted)", "", wants)
+wants  = str_trim(gsub("OWS", "", wants))
+write(ams, "data/wants.txt")
+iAms = function(body){
+sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
+return(as.character(sentences))
+}
+extract i ams
+ams = unlist(llply(d$body, iAms))
+ams = gsub("I am", "", ams)
+ams = gsub("99%", "", ams)
+ams = gsub("99 percent", "", ams)
+ams = str_trim(gsub("OWS", "", ams))
+write(ams, "data/ams.txt")
 setwd("~/Dropbox/GitRepository/occupydata/")
-data = read.csv("data/tumblrClean.csv", stringsAsFactors=F)
-remove empties
-data = data[which(data$body!=""),]
-convert date
-data$date = as.Date(data$datetime)
-counts = ddply(data, .(date), nrow)
-plot(counts, type="h")
-text = str_trim(
-tolower(
-gsub("[[:punct:]]", " ", data$body)))
-text = stemDocument(text)
-convert to corpus
-text = Corpus(VectorSource(text))
-remove stopwords
-stopwords <- c(stopwords('SMART'),
-"occupywallst.org",
-"http://",
-"99", "000", "wall",
-"k", "don", "occupy", "street",
-"week", "year", "years")
-text <- tm_map(text, removeWords, stopwords)
-text <- tm_map(text, stripWhitespace)
-text <- tm_map(text, removeNumbers)
-text = gsub("  ", " ", text)
-change document lines into the format for LDA
-doclines<-as.character(text)
-corpus<-lexicalize(doclines, sep=" ", count=1)
-Only keep words that appear at least twice, and you might change the number from 1 to 2, 3, 4 or others:
-N is the the least number of appearance of words that can be considered
-N<-2
-keep <- corpus$vocab[word.counts(corpus$documents, corpus$vocab) >= N]
-Re-lexicalize, using this subsetted vocabulary
-documents <- lexicalize(doclines, lower=TRUE, vocab=keep)
-Gibbs Sampling
-K is the number of topics
-K<-4
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-top.topic.words(result$topics, num.words = 20, by.score = FALSE)
-topic.films<-rep(0,2522)
-for(j in 1:2522) {
-topic.films[j]<-which.max(result$document_sums[ ,j])
-ifelse(max(result$document_sums[,j])==0, topic.films[j]<-0, topic.films[j]<-topic.films[j])
+library("plyr")
+library("stringr")
+extract i wants
+iWants = function(body){
+sentences = unlist(str_extract_all(body, "(want|wanted)[^\\.]*."))
+return(as.character(sentences))
 }
-data$topic = topic.films
-head(data$topic)
-top.topic.words(result$topics, num.words = 10, by.score = FALSE)
-K<-5
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-top.topic.words(result$topics, num.words = 10, by.score = FALSE)
-K<-4
-K<-4
-result <- lda.collapsed.gibbs.sampler(documents,K, keep, 1000, 0.1, 0.1)
-top.topic.words(result$topics, num.words = 10, by.score = FALSE)
-data$topic[data$topic=0] = NA
-data$topic[data$topic=1] = "Students"
-data$topic[data$topic=2] = "Ideals"
-data$topic[data$topic=3] = "Health Care"
-data$topic[data$topic=4] = "Jobs/Economy"
-topics<-rep(0,2522)
-for(j in 1:2522) {
-topics[j]<-which.max(result$document_sums[ ,j])
-ifelse(max(result$document_sums[,j])==0, topics[j]<-0, topic.films[j]<-topic.films[j])
+wants = unlist(llply(d$body, iWants))
+write(ams, "data/wants.txt")
+iAms = function(body){
+sentences = unlist(str_extract_all(body, "I am [^\\.]*."))
+return(as.character(sentences))
 }
-data$topic = topic.films
-assign semantic labels
-data$topic[data$topic==0] = NA
-data$topic[data$topic==1] = "Students"
-data$topic[data$topic==2] = "Ideals"
-data$topic[data$topic==3] = "Health Care"
-data$topic[data$topic==4] = "Jobs/Economy"
-data$topic = as.factor(data$topic)
-table(data$topic)
-write.csv(data, "data/tumblrTopics.csv", row.names=F)
+extract i ams
+ams = unlist(llply(d$body, iAms))
+write(ams, "data/ams.txt")
