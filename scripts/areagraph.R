@@ -1,5 +1,5 @@
 # Type 0: stacked area, 1: themeriver, 2: streamgraph
-areaGraph <- function(thedata, type=2, smooth=TRUE, nPoints =10000) {
+areaGraph <- function(thedata, type=2, smooth=TRUE, nPoints =5000) {
 	
 	# Color palette
 	nColors <- 10

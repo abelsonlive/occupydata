@@ -10,6 +10,8 @@ data = read.csv("data/tumblrFinal.csv", stringsAsFactors=F)
 names(data) = tolower(gsub("\\.","",names(data)))
 data$date = as.Date(data$datetime)
 data = data[order(data$date, decreasing=F),]
+
+# gen vars
 data$p1 = ifelse(data$topic==1,1,0)
 data$p2 = ifelse(data$topic==2,1,0)
 data$p3 = ifelse(data$topic==3,1,0)
@@ -18,7 +20,6 @@ data$p_pos= ifelse(data$fit=="positive",1,0)
 data$p_neg= ifelse(data$fit=="negative",1,0)
 data$p_neu= ifelse(data$fit=="neutral",1,0)
 
-plot(ddply(data, .(date), nrow), type="l")
 # normalize variables
 normalize = function(x){
 	x = sqrt(x/max(x))
@@ -42,7 +43,7 @@ viz_data = sqldf("select date,
 						 from data
 						 group by date")
 head(viz_data)
-viz_data_1 = t(viz_data[,6:12])
+viz_data_1 = t(viz_data[,c(2:5)])
 # smooth over time
 smoother = function(y){
 	 y = lowess(y~1:length(y), f=0.09)$y
@@ -50,4 +51,4 @@ smoother = function(y){
 }
 viz_data_1 = t(apply(viz_data_1, 1, smoother))
 names(viz_data_1) = as.Date(viz_data$date)
-areaGraph(viz_data_1)
+areaGraph(viz_data_1, type=2)
