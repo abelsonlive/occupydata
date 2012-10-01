@@ -10,8 +10,11 @@ data = read.csv("data/tumblrFinal.csv", stringsAsFactors=F)
 names(data) = tolower(gsub("\\.","",names(data)))
 data$date = as.Date(data$datetime)
 data = data[order(data$date, decreasing=F),]
+<<<<<<< HEAD
 
 # gen vars
+=======
+>>>>>>> 9c6fadd9e9e3f064529b6ed62fd23439c17f3114
 data$p1 = ifelse(data$topic==1,1,0)
 data$p2 = ifelse(data$topic==2,1,0)
 data$p3 = ifelse(data$topic==3,1,0)
@@ -20,6 +23,10 @@ data$p_pos= ifelse(data$fit=="positive",1,0)
 data$p_neg= ifelse(data$fit=="negative",1,0)
 data$p_neu= ifelse(data$fit=="neutral",1,0)
 
+<<<<<<< HEAD
+=======
+plot(ddply(data, .(date), nrow), type="l")
+>>>>>>> 9c6fadd9e9e3f064529b6ed62fd23439c17f3114
 # normalize variables
 normalize = function(x){
 	x = sqrt(x/max(x))
@@ -43,7 +50,11 @@ viz_data = sqldf("select date,
 						 from data
 						 group by date")
 head(viz_data)
+<<<<<<< HEAD
 viz_data_1 = t(viz_data[,c(2:5)])
+=======
+viz_data_1 = t(viz_data[,6:12])
+>>>>>>> 9c6fadd9e9e3f064529b6ed62fd23439c17f3114
 # smooth over time
 smoother = function(y){
 	 y = lowess(y~1:length(y), f=0.09)$y
@@ -51,4 +62,8 @@ smoother = function(y){
 }
 viz_data_1 = t(apply(viz_data_1, 1, smoother))
 names(viz_data_1) = as.Date(viz_data$date)
+<<<<<<< HEAD
 areaGraph(viz_data_1, type=2)
+=======
+areaGraph(viz_data_1)
+>>>>>>> 9c6fadd9e9e3f064529b6ed62fd23439c17f3114
